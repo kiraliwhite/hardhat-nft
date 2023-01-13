@@ -6,10 +6,11 @@ const networkConfig = {
     vrfCoordinatorV2: "0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D", //chainLink官方部署的合約地址
     entranceFee: ethers.utils.parseEther("0.01"),
     gasLane: "0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15",
-    subscriptionId: "7587",
+    subscriptionId: "8402",
     callbackGasLimit: "500000", //500,000
     interval: "30", //每30秒檢查一次
     ethUsdPriceFeed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e", // goerli 測試網上的eth/usd 餵價智能合約地址
+    mintFee: ethers.utils.parseEther("0.01"),
   },
   31337: {
     name: "hardhat",
@@ -17,6 +18,7 @@ const networkConfig = {
     gasLane: "0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15",
     callbackGasLimit: "500000", //500,000
     interval: "30",
+    mintFee: ethers.utils.parseEther("0.01"),
   },
 };
 

@@ -58,6 +58,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
     i_keyHash = _keyHash;
     s_nftTokenUris = _tokenUris;
     i_mintFee = _mintFee;
+    s_tokenCounter = 0;
   }
 
   function requestNft() public payable returns (uint256 requestId) {
@@ -85,6 +86,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
     uint256 moddedRng = _randomWords[0] % MAX_CHANCE_VALUE;
     //透過function用隨機數取得對應的稀有度
     Rare nftRare = getRareFromModdedRng(moddedRng);
+    s_tokenCounter = s_tokenCounter + 1;
     //鑄造NFT
     _safeMint(nftOwner, newTokenId);
     //設定NFT的tokenURI,輸入tokenId,tokenURI string,
@@ -110,7 +112,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
 
     //for迴圈用來遍歷該稀有度陣列
     for (uint256 i = 0; i < chanceArray.length; i++) {
-      if (_moddedRng >= totalSum && _moddedRng < totalSum + chanceArray[i]) {
+      if (_moddedRng >= totalSum && _moddedRng < chanceArray[i]) {
         return Rare(i);
       }
       totalSum += chanceArray[i];
@@ -133,5 +135,13 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
 
   function getTokenCounter() public view returns (uint) {
     return s_tokenCounter;
+  }
+
+  function getGasLane() public view returns (bytes32) {
+    return i_keyHash;
+  }
+
+  function getAddressFromRequestId(uint _requestId) public view returns (address) {
+    return s_requestIdToSender[_requestId];
   }
 }
