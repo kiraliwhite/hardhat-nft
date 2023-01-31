@@ -1,5 +1,5 @@
 const { network } = require("hardhat");
-const { developmentChains } = require("../helper-hardhat-config");
+const { developmentChains, DECIMALS, INITIAL_ANSWER } = require("../helper-hardhat-config");
 
 //此值就是chainlink documention的premium,為0.25顆LINK token
 const BASE_FEE = ethers.utils.parseEther("0.25");
@@ -17,6 +17,12 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
       from: deployer,
       log: true,
       args: args,
+      waitConfirmations: network.config.blockConfirmations || 1,
+    });
+    await deploy("MockV3Aggregator", {
+      from: deployer,
+      log: true,
+      args: [DECIMALS, INITIAL_ANSWER],
       waitConfirmations: network.config.blockConfirmations || 1,
     });
     log("Mocks Deployed!");
