@@ -5,7 +5,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 pragma solidity ^0.8.7;
 
 contract BasicNft is ERC721 {
-  string public constant TOKEN_URI = "ipfs://bafybeig37ioir76s7mg5oobetncojcm3c3hxasyd4rvid4jqhy4gkaheg4/?filename=0-PUG.json";
+  string public constant TOKEN_URI =
+    "ipfs://bafybeig37ioir76s7mg5oobetncojcm3c3hxasyd4rvid4jqhy4gkaheg4";
   uint private s_tokeCounter; //設定一個變數 讓其自動計數tokenId
 
   //傳入ERC721.sol的constuctor的name跟symbol
